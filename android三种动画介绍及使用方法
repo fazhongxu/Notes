@@ -20,6 +20,7 @@
 
 - TranslateAnimation 平移动画
 
+动画集合能让四种动画同时执行
 - AnimationSet 集合动画
 
 ---
@@ -93,7 +94,8 @@
 
 #### 方法二，代码方式创建使用
 	
-	ValueAnimator valueAnimator = ObjectAnimator.ofFloat();
+	ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(imageView,"translationY",12,13,23,90);//imageView，要执行动画的控件，translationY要执行的动画的名称,12,13,23,90//多个参数，从12平移到13到23到90
+		//        imageView.setTranslationY();//忘记第二个参数名字可以这样提示，然后复制过去translationY
 	//或者 ValueAnimator valueAnimator = ObjectAnimator.ofFloat();
 
 	        valueAnimator.setDuration();//设置动画执行时间
@@ -102,30 +104,32 @@
 	        valueAnimator.start();//开始执行动画
 	        valueAnimator.addUpdateListener();//设置监听
 
+
 ----
 ### 三帧动画的使用
 
 - 第一步 ：res/drawable/目录下创建一个<animation-list>为节点的xml文件，设置图片，执行时间。
 
-- android:oneshot="true"//设置动画执行模式，oneshot是执行一次
+-       android:oneshot="true"//设置动画执行模式，oneshot是执行一次
+-       
 
-	<?xml version="1.0" encoding="utf-8"?>
-	<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:oneshot="true">
-	
-	    <item
-	        android:drawable="@drawable/style_color_themes_dark1"
-	        android:duration="200" />
-	    <item
-	        android:drawable="@drawable/style_color_themes_dark2"
-	        android:duration="200" />
-	    <item
-	        android:drawable="@drawable/style_color_themes_light1"
-	        android:duration="200" />
-	    <item
-	        android:drawable="@drawable/style_color_themes_light2"
-	        android:duration="200" />
-	</animation-list>
+    	<?xml version="1.0" encoding="utf-8"?>
+    	<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    	    android:oneshot="true">
+    	
+    	    <item
+    	        android:drawable="@drawable/style_color_themes_dark1"
+    	        android:duration="200" />
+    	    <item
+    	        android:drawable="@drawable/style_color_themes_dark2"
+    	        android:duration="200" />
+    	    <item
+    	        android:drawable="@drawable/style_color_themes_light1"
+    	        android:duration="200" />
+    	    <item
+    	        android:drawable="@drawable/style_color_themes_light2"
+    	        android:duration="200" />
+    	</animation-list>
 
 - 第二步：在代码中加载动画
 
