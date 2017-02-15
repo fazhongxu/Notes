@@ -1,0 +1,146 @@
+## Android中的动画
+### Android中共有三种动画
+- Tween Animation 补间动画
+
+- Property Animation 属性动画
+
+- Frame Animation 帧动画
+
+---
+
+### 补间动画
+#### 四个类
+---
+
+- AlphaAnimation 透明动画
+
+- RotateAnimation 旋转动画
+
+- ScaleAnimation 缩放动画
+
+- TranslateAnimation 平移动画
+
+- AnimationSet 集合动画
+
+---
+
+### 使用步骤
+#### 方法一，创建xml方式，代码中仲animationUtils加载调用
+- 第一步 ：xml->anim目录下创建一个xml文件，设置起始点，执行时间等
+
+- 第二步：在代码中通过  AnimationUtils.loadAnimation(context,R.anim.xxxx);
+
+- 第三步：animtion.start();开启动画
+##
+
+如果需要额外的额设置,可以进行如下设置
+
+	animation.setDuration();//设置执行时间
+        animation.start();//设置开始执行
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                //动画开始执行调用
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //动画执行结束调用
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+		       //动画重复的时候调用
+            }
+        });
+
+### 方法二，代码创建动画并使用
+
+		//TranslateAnimation animation = new TranslateAnimation();//参数int fromXType, float fromXValue, int toXType, float toXValue, int fromYType, float fromYValue, int toYType, ..
+		//ScaleAnimation aimation = new ScaleAnimation();//参数float fromX, float toX, float fromY, float toY, int pivotXType, float pivotXValue, int pivotYType,
+		//AnimationSet set = new AnimationSet()//  参数Context context, AttributeSet attrs
+		//RotateAnimation animation = new RotateAnimation();//float fromDegrees, float toDegrees, int pivotXType, float pivotXValue, int pivotYType, float pivotYValue
+
+        animation.setDuration();//设置延迟时间
+        animation.start();//开始执行动画
+        animation.setAnimationListener();//设置动画监听
+
+---
+
+### 属性动画
+#
+---
+### 属性动画有连个类
+---
+- ValueAnimator
+- ObjectAnimator
+- 其中objectAnimator继承valueAnimator
+	
+### 使用步骤
+#### 方法一，通过xml布局文件创建，代码中用animatorInflater加载调用
+
+- 第一步 ：res/animator目录下创建一个xml文件，设置起始点，执行时间等属性
+
+- 第二步：在代码中加载动画
+
+	AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(myContext,
+		    R.anim.property_animator);
+		set.setTarget(myObject);
+
+- 第三步：set.start();开启动画
+
+---
+
+#### 方法二，代码方式创建使用
+	
+	ValueAnimator valueAnimator = ObjectAnimator.ofFloat();
+	//或者 ValueAnimator valueAnimator = ObjectAnimator.ofFloat();
+
+	        valueAnimator.setDuration();//设置动画执行时间
+	        valueAnimator.setInterpolator(new OvershootInterpolator());//设置动画插值器，执行特效，比如：OvershootInterpolator是弹的效果
+
+	        valueAnimator.start();//开始执行动画
+	        valueAnimator.addUpdateListener();//设置监听
+
+----
+### 三帧动画的使用
+
+- 第一步 ：res/drawable/目录下创建一个<animation-list>为节点的xml文件，设置图片，执行时间。
+
+- android:oneshot="true"//设置动画执行模式，oneshot是执行一次
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:oneshot="true">
+	
+	    <item
+	        android:drawable="@drawable/style_color_themes_dark1"
+	        android:duration="200" />
+	    <item
+	        android:drawable="@drawable/style_color_themes_dark2"
+	        android:duration="200" />
+	    <item
+	        android:drawable="@drawable/style_color_themes_light1"
+	        android:duration="200" />
+	    <item
+	        android:drawable="@drawable/style_color_themes_light2"
+	        android:duration="200" />
+	</animation-list>
+
+- 第二步：在代码中加载动画
+
+	1.布局文件里面设置一个ImageView
+
+	2.代码里面找到imageView
+
+	3.给imageView设置一个背景资源
+	
+ 	imageView.setBackgroundResource(R.drawable.frame_animation);//或者在布局文件里面直接设置
+	
+	4.获取背景,强制转换为AnimationDrawable
+
+        AnimationDrawable background = (AnimationDrawable) imageView.getBackground();
+	5.开始执行动画
+		imgeaview.start();
+
+---
