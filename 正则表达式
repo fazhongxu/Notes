@@ -1,0 +1,143 @@
+http://blog.csdn.net/yin380697242/article/details/52049999
+
+概述
+
+Pattern类的作用在于编译正则表达式后创建一个匹配模式.
+Matcher类使用Pattern实例提供的模式信息对正则表达式进行匹配
+Pattern类
+
+常用方法及介绍
+
+Pattern complie(String regex) 
+由于Pattern的构造函数是私有的,不可以直接创建,所以通过静态方法compile(String regex)方法来创建,将给定的正则表达式编译并赋予给Pattern类
+
+String pattern() 返回正则表达式的字符串形式,其实就是返回Pattern.complile(String regex)的regex参数
+
+String regex = "\\?|\\*";
+Pattern pattern = Pattern.compile(regex);
+String patternStr = pattern.pattern();//返回\?\*
+1
+2
+3
+1
+2
+3
+Pattern compile(String regex, int flags) 方法功能和compile(String regex)相同,不过增加了flag参数
+
+int flags() 返回当前Pattern的匹配flag参数. 
+flag参数用来控制正则表达式的匹配行为,可取值范围如下:
+
+Pattern.CANON_EQ 当且仅当两个字符的”正规分解(canonical decomposition)”都完全相同的情况下，才认定匹配.比如用了这个标志之后，表达式”a\u030A”会匹配”?”.默认情况下，不考虑”规范相等性(canonical equivalence)”.
+
+Pattern.CASE_INSENSITIVE(?i) 默认情况下,大小写不明感的匹配只适用于US-ASCII字符集.这个标志能让表达式忽略大小写进行匹配.要想对Unicode字符进行大小不明感的匹 配,只要将UNICODE_CASE与这个标志合起来就行了.
+
+Pattern.COMMENTS(?x) 在这种模式下,匹配时会忽略(正则表达式里的)空格字符(译者注:不是指表达式里的”\s”，而是指表达式里的空格,tab,回车之类).注释从#开始,一直到这行结束.可以通过嵌入式的标志来启用Unix行模式.
+
+Pattern.DOTALL(?s)在这种模式下，表达式’.’可以匹配任意字符，包括表示一行的结束符。默认情况下，表达式’.’不匹配行的结束符.
+
+Pattern.MULTILINE(?m)在这种模式下,’\^’和’$’分别匹配一行的开始和结束.此外,’^’仍然匹配字符串的开始,’$’也匹配字符串的结束.默认情况下,这两个表达式仅仅匹配字符串的开始和结束.
+
+Pattern.UNICODE_CASE(?u) 在这个模式下,如果你还启用了CASE_INSENSITIVE标志,那么它会对Unicode字符进行大小写不明感的匹配.默认情况下,大小写不敏感的匹配只适用于US-ASCII字符集.
+
+Pattern.UNIX_LINES(?d) 在这个模式下,只有’\n’才被认作一行的中止,并且与’.’,’^’,以及’$’进行匹配.
+Pattern.matcher(CharSequence input) 对指定输入的字符串创建一个Matcher对象
+Pattern pattern = Pattern.compile("\\?{2}");
+Matcher matcher = pattern.matcher("??");
+boolean matches = matcher.matches();// true
+1
+2
+3
+1
+2
+3
+String[] split(CharSequence input) 
+String[] split(CharSequence input, int limit)
+
+String[] split(CharSequence input, int limit) 
+功能和String[] split(CharSequence input)相同,增加参数limit目的在于要指定分割的段数
+
+String regex = "\\?|\\*";
+Pattern pattern = Pattern.compile(regex);
+String[] splitStrs = pattern.split("123?123*456*456");//123 123 456 456
+String[] splitStrs2 = pattern.split("123?123*456*456", 2);// 123 123*456*456
+1
+
+Pattern.quote(String s) 返回给定的字符串的字面量,关于方法的具体信息请参考123
+String pattern = Pattern.quote("1252343% 8 567 hdfg gf^$545");
+System.out.println("Pattern is : "+pattern);
+1
+2
+1
+2
+输出信息:
+
+Pattern is : \Q1252343% 8 567 hdfg gf^$545\E
+
+matches()方法编译给定的正则表达式并且对输入的字串以该正则表达式为模开展匹配,该方法适合于该正则表达式只会使用一次的情况,也就是只进行一次匹配工作,因为这种情况下并不需要生成一个Matcher实例.
+String regex = "\\?|\\*";
+Pattern pattern = Pattern.compile(regex);
+boolean matches = pattern.matches(regex, "?");//返回true
+1
+2
+3
+1
+2
+3
+Matcher类
+
+常用方法及介绍
+
+boolean matches() 最常用方法:尝试对整个目标字符展开匹配检测,也就是只有整个目标字符串完全匹配时才返回真值.
+Pattern pattern = Pattern.compile("\\?{2}");
+Matcher matcher = pattern.matcher("??");
+boolean matches = matcher.matches();//true
+System.out.println(matches);
+matcher=pattern.matcher("?");
+matches = matcher.matches();//false
+System.out.println(matches);
+
+
+7
+boolean lookingAt() 对前面的字符串进行匹配,只有匹配到的字符串在最前面才会返回true
+Pattern p = Pattern.compile("\\d+");
+Matcher m = p.matcher("22bb23");
+boolean match = m.lookingAt();//true
+System.out.println(match);
+m = p.matcher("bb2233");
+match= m.lookingAt();
+System.out.println(match);//false
+1
+
+6
+7
+boolean find() 对字符串进行匹配,匹配到的字符串可以在任何位置
+Pattern p = Pattern.compile("\\d+");
+Matcher m = p.matcher("22bb23");
+m.find();// 返回true
+Matcher m2 = p.matcher("aa2223");
+m2.find();// 返回true
+Matcher m3 = p.matcher("aa2223bb");
+m3.find();// 返回true
+Matcher m4 = p.matcher("aabb");
+m4.find();// 返回false
+1
+int start() 返回当前匹配到的字符串在原目标字符串中的位置
+int end() 返回当前匹配的字符串的最后一个字符在原目标字符串中的索引位置.
+String group() 返回匹配到的子字符串 
+Pattern.start(),Pattern.end(),Pattern.group()代码示例
+Pattern p = Pattern.compile("\\d+");
+Matcher m = p.matcher("aa22bb23");
+m.find();
+int start = m.start();//2
+String group = m.group();//22
+int end = m.end();//4
+System.out.println(start);
+System.out.println(group);
+System.out.println(end);
+
+还有一些其他常用的方法,请参考API自行学习或者参考其他博客.
+
+参考博客: 
+1. http://www.cnblogs.com/playing/archive/2011/03/15/1984943.html 
+2. http://blog.csdn.net/cclovett/article/details/12448843 
+3. http://www.blogjava.net/jayslong/archive/2011/04/21/embeded_flag_expressions_in_java_regex.html
