@@ -17,7 +17,7 @@ public class SingleTon {
                }
                return instance;
            }*/
- /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，线程较安全，但是也不是最安全
+ /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，同步方法，实现互斥访问，保证线程安全，但是也不是最安全
         if (instance ==  null) {
             instance = new SingleTon();
         }
