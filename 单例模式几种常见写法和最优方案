@@ -1,0 +1,66 @@
+package com.test.thirdlogindemo;
+
+/**
+ * Created by xxl on 2017/5/31.
+ */
+
+public class SingleTon {
+
+    public static SingleTon instance = null;
+
+    /**
+     * 私有构造，不让外界通过构造创建对象
+     */
+    private SingleTon() {
+    }
+    /*   public static SingleTon getInstance() {//方法1 ，lazy模式，优点：不会资源浪费，缺点：没有考虑线程安全
+               if (instance == null) {
+                   instance = new SingleTon();
+               }
+               return instance;
+           }*/
+ /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，线程较安全，但是也不是最安全
+        if (instance ==  null) {
+            instance = new SingleTon();
+        }
+        return instance;
+    }*/
+    /*public static SingleTon getInstance() {//方方法3，lazy模式，单重保护，不太安全
+        if (instance == null) {
+            synchronized (SingleTon.class) {
+                instance = new SingleTon();
+            }
+        }
+        return instance;
+    }*/
+   /* public static SingleTon getInstance() {//方法4 ，lazy模式，双重保护，线程安全，，效率低
+        if (instance == null) {
+            synchronized (SingleTon.class) {
+                synchronized (SingleTon.class) {
+                    instance = new SingleTon();
+                }
+            }
+        }
+        return instance;
+    }*/
+
+    /**
+     * 静态代码块优先于普通代码块执行，类加载的时候先加载静态代码块，再加载构造方法和普通变量
+     * 所以在返回单例时直接返回即可，静态代码块只在类加载的时候执行一次，线程安全
+     */
+//    public static SingleTon instan = new SingleTon();//方法5 ，，非lazy模式,优点,线程安全，缺点，可能资源浪费
+//
+//    public static SingleTon getInstan() {
+//        return instan;
+//    }
+
+    static class Instance {//方法6 ，最优方案 推荐使用，静态内部类，JVM加载类是互斥的，所以不用考虑同步问题，相当于lazy模式，线程安全
+        //单例变量
+        private static SingleTon in = new SingleTon();
+    }
+
+    public static SingleTon getInstance() {
+        return Instance.in;
+    }
+
+}
