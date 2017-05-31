@@ -17,14 +17,16 @@ public class SingleTon {
                }
                return instance;
            }*/
- /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，同步方法，实现互斥访问，保证线程安全，但是也不是最安全
+ /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，同步方法，实现互斥访问，保证线程安全，但是同步需要消耗性能，影响效率
         if (instance ==  null) {
             instance = new SingleTon();
         }
         return instance;
     }*/
-    /*public static SingleTon getInstance() {//方方法3，lazy模式，双重检查加锁，不太安全
-        if (instance == null) {
+    
+    //上面的方法性能不好，发现只需保证instance = new Singleton线程安全就行了，
+    /*public static SingleTon getInstance() {//方方法3，lazy模式，双重检查加锁，不太安全，线程A B 同时到达 1 的位置，A进入，创建实例返回，B等待，A创建实例返回后，B进入，又创建了一个实例，所以需要双重加锁
+        if (instance == null) {//1
             synchronized (SingleTon.class) {
                 instance = new SingleTon();
             }
