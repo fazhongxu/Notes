@@ -23,7 +23,7 @@ public class SingleTon {
         }
         return instance;
     }*/
-    /*public static SingleTon getInstance() {//方方法3，lazy模式，单重保护，不太安全
+    /*public static SingleTon getInstance() {//方方法3，lazy模式，双重检查加锁，不太安全
         if (instance == null) {
             synchronized (SingleTon.class) {
                 instance = new SingleTon();
@@ -31,7 +31,7 @@ public class SingleTon {
         }
         return instance;
     }*/
-   /* public static SingleTon getInstance() {//方法4 ，lazy模式，双重保护，线程安全，，效率低
+   /* public static SingleTon getInstance() {//方法4 ，lazy模式，双重检查加锁，线程安全，，效率低
         if (instance == null) {
             synchronized (SingleTon.class) {
                 synchronized (SingleTon.class) {
