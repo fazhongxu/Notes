@@ -17,7 +17,10 @@ public class SingleTon {
                }
                return instance;
            }*/
- /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，同步方法，实现互斥访问，保证线程安全，但是同步需要消耗性能，影响效率
+ /*   public synchronized static SingleTon getinstance() {//方法2，lazy模式，方法前加synchoronized修饰，
+ //这种方式每次调用getInstance都要给对象上同步锁，性能下降，但是只需要第一个调用的时候创建对象的时候加锁，之后就不需要了
+ //同步方法，实现互斥访问，保证线程安全，
+ //但是同步需要消耗性能，影响效率
         if (instance ==  null) {
             instance = new SingleTon();
         }
