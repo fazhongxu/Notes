@@ -20,7 +20,7 @@ public class SingleTon {
     }
 
     
-    static class Instance {//单例模式方法1，静态内部类，不需要使用synchronize，JVM加载类是互斥的，所以不用考虑同步问题，相当于lazy模式，线程安全
+    static class Instance {//单例模式方法1，静态内部类，不需要使用synchronize，不需要双重判断instance == nullJVM加载类是互斥的，所以不用考虑同步问题，相当于lazy模式，线程安全
         private static SingleTon in = new SingleTon();
     }
 
