@@ -1,0 +1,37 @@
+## map遍历		 
+	 Map<Integer,String> map = new TreeMap<>();
+		
+		        for (Integer in : map.keySet()) {
+		            String s = map.get(in);
+	            System.out.println(s);
+	        }
+	        for (Map.Entry<Integer,String> entry : map.entrySet()) {
+	            System.out.println(entry.getKey()+"-----------"+entry.getValue());
+	        }
+
+## Android Studio 9patch制作
+
+-  drawable目录下，选中要制作的图片，右击create 9 patch file创建出.9图片
+
+- 双击9 patch 图片，进入制作
+
+-  9patch 图片的特点是有四个边可以移动(黑色的边，初始化状态是在图片的四条边上) 通过在图片的最外边点击可以拖动边的范围。
+
+- 四条边的含义
+
+- 上：在黑边范围内，左右拉伸不变形，黑边外保持原样（不拉伸，也不缩小）
+
+- 左：在黑边范围内，上下拉伸不变形，黑边外图形形状保持原样
+
+- 下：在黑边范围内显示文字内容，外边不显示，用于控制左右文字显示内容区域
+
+- 右：在黑边范围内显示文字内容，外边不显示，用于控制文字上线显示内容的区域
+
+## file
+
+- file.mkdirs 创建目录 可以是多级
+- file.createNewFile 创建文件
+- file.exists 判断是否存在
+- file.isDirectory 判断是目录
+- file.listFiles列出所有该目录下的文件 返回集合
+- file.delete 删除
