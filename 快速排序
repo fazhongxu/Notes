@@ -122,6 +122,30 @@ X = 42
 
 依次类推，最终就能排位整齐的一队。
 
-
+ 代码实现如下
+ 
+ private void quicklySort(int[] arr, int l, int r) {
+        if (l < r) {
+            int i = l, j = r, X = arr[l];
+            while (i < j) {
+                while (i < j && arr[j] > X) {
+                    j--;
+                }
+                if (i < j) {
+                    arr[i] = arr[j];
+                    i++;
+                }
+                while (i < j && arr[i] < X) {
+                    i++;
+                }
+                if (i < j) {
+                    arr[j] = arr[i];
+                    j--;
+                }
+            }
+            arr[i] = X;
+            quicklySort(arr, l, i - 1);
+            quicklySort(arr, i + 1, r);
+        }
 
 
