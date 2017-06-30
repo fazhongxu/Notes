@@ -125,27 +125,29 @@ X = 42
  代码实现如下
  
  private void quicklySort(int[] arr, int l, int r) {
-        if (l < r) {
-            int i = l, j = r, X = arr[l];
+        if (l < r) {    //方便递归调用
+            int i = l, j = r, X = arr[l];//用X盒子来装基准数（作为参照物）
             while (i < j) {
-                while (i < j && arr[j] > X) {
-                    j--;
+                while (i < j && arr[j] > X) {//j从右往左开始循环，如果右边的数都大于基准数
+                    j--;  //则继续往左
                 }
-                if (i < j) {
+                if (i < j) {  //否则 右边找到有数小于等于基准数，把这个数赋值给arr[i],即基准数原来所在的位置
                     arr[i] = arr[j];
-                    i++;
+                    i++;//让出机会，让i开始循环
                 }
-                while (i < j && arr[i] < X) {
-                    i++;
+                while (i < j && arr[i] < X) {//i从左往右开始循环，如果左边的数都小于基准数
+                    i++;//则继续往右
                 }
-                if (i < j) {
+                if (i < j) {//否则 左边的找到有数大于等于基准数，把找到的值赋值给j刚才让出来的位置
                     arr[j] = arr[i];
-                    j--;
+                    j--;//让出机会，让j开始循环
                 }
             }
-            arr[i] = X;
-            quicklySort(arr, l, i - 1);
-            quicklySort(arr, i + 1, r);
+            arr[i] = X;//如果i不小于j说明此时i,j 已经相遇，值已经相等，这时候把基准数赋值给i或j所在的位置
+            //到此已经排好第一轮，数据排序情况为 基准数左边的数都小于基准数，基准数右边的数都大于基准数
+            //下面开始递归调用，把基准数左右两边的数分别递归调用获取得到新一轮的进一步排序，左边和右边的里面的数也是基准数左边的数比基准数小，右边的数比基准数右边大
+            quicklySort(arr, l, i - 1);//基准数左边部分
+            quicklySort(arr, i + 1, r);//基准数右边部分
         }
 
 
