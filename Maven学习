@@ -1,0 +1,9 @@
+  
+  settings.xml文件里面配置mirror镜像
+  
+  <mirror>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <mirrorOf>central</mirrorOf>        
+    </mirror>
