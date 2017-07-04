@@ -150,5 +150,7 @@ X = 42
             quicklySort(arr, l, i - 1);//基准数左边部分
             quicklySort(arr, i + 1, r);//基准数右边部分
         }
-
+        
+        
+        时间复杂度为O(n^2)
 
