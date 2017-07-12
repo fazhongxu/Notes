@@ -1,0 +1,18 @@
+public class HelloWorld {
+    public static void main(String []args) {
+		String st = "aabccfdsffabccddfefcbabakgg";
+    	System.out.println(getSubString(st,"cc"));
+    }
+	
+	static int getSubString(String str,String key) {//查找字符串在一串字符中出现的次数
+		int count = 0;
+		int index = 0;
+		while((index = str.indexOf(key,index)) != -1) {//int indexOf(String key,int index) 方法，
+			//返回指定字符串中第一次出现指定字符串的索引，如果没有，返回-1
+			index += key.length();
+			count ++;
+		}
+		return count;
+	}
+
+}
