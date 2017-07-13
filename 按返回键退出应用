@@ -1,0 +1,12 @@
+  long lastTime;
+    @Override
+    public void onBackPressed() {
+
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastTime > 1000) {
+            toastOnUiThread("再按一次，您就可以离开了！");//toastUiThread内部用了new Pandler.postDe
+            lastTime = currentTime;
+        } else {
+            super.onBackPressed();
+        }
+    }
