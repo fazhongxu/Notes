@@ -1,0 +1,12 @@
+import java.io.*;
+import java.util.regex.*;
+class test  
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{   
+	    Pattern p = Pattern.compile("^(1[3,4,5,7,9])\\d{9}$");// ^ 开始 $结束 [] 任意一个 () 必须 \\d整数 {9}  9个元素 
+	    Matcher m = p.matcher("15100000000");
+	    
+		System.out.println(m.matches());
+	}
+}
