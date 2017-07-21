@@ -1,0 +1,2 @@
+setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this,R.drawable.ic_follow),null,null,null);//代码设置TextView的drawableLeft
+//隐藏的话，全部传入null即可
