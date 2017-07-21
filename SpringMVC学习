@@ -1,0 +1,93 @@
+依赖网址 http://www.mvnrepository.com/
+
+下载sts
+
+1.新建Maven项目，在pom文件夹里面配置spring相关
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.edu.ncist</groupId>
+	<artifactId>hello</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<spring-version>4.3.6.RELEASE</spring-version>
+
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${spring-version}</version>
+		</dependency>
+				
+
+
+	</dependencies>
+</project>
+
+
+2.项目右键，properties->Projec Facets设置Daynamic版本为3.0,（web项目相关设置）
+
+如果不能修改的话，去项目下的。settrings文件夹下面找到对应文件修改，重启eclipse即可
+
+目的是让Dynamic Web Module自动生成WebContent文件夹和其下面的web.xml文件
+
+3.配置web.xml,web.xml是程序的入口
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+id="WebApp_ID" version="3.0">
+
+
+<!--配置spring  -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+  <!-- 配置类加载路径，在src/main/resources下生成对应文件application.xml（可以自己命名，但是保证和此处一致）-->
+	<param-value>classpath:application.xml</param-value>
+</context-param>
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<!-- spring-mvc -->
+
+
+
+</web-app>
+
+
+
