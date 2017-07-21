@@ -1,0 +1,43 @@
+package com.xxl.rxjava2demo.util;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by xxl on 2017/7/20.
+ */
+
+public class GonUtil {
+
+    private static Gson gson = null;
+
+    static {
+        if (gson == null) {
+            gson = new Gson();
+        }
+    }
+
+    public static <T> T Gson2Bean(String json, Class<T> clazz) {
+        T t = null;
+        if (gson != null) {
+            t = gson.fromJson(json, clazz);
+        }
+        return t;
+    }
+
+    public static <T> List<T> Gosn2List(String json, Class<T> clazz) {
+        List<T> list = new ArrayList<>();
+        if (gson != null) {
+            JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
+            for (JsonElement jsonElement : jsonArray) {
+                list.add(gson.fromJson(jsonElement, clazz));
+            }
+        }
+        return list;
+    }
+}
