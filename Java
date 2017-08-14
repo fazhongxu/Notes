@@ -2,3 +2,7 @@ ArrayList去除重复元素，在JavaBean中，重写equals方法，把obj类型
 假设我们认为姓名相同，年龄相同就是同一个人，那么有Person person = (Person)obj;
 return person.name.equals(this.name) && person.age == this,age;就可以了。
 
+
+HashSet特点，存取无序，元素唯一，比较自定义对象需要重写equals方法，和hashcode方法，不重写hashcode方法equals方法不执行。
+linkedhashset是Set集合中唯一一个能够保证怎么存就怎么取的。
+
