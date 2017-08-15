@@ -1,0 +1,26 @@
+拿到一个AndroidStudio项目，首先要做的不是用Studio直接导入或者打开项目，而是应该做如下操作：
+
+1.工程路径下，查看项目下的build.gradle里面的classpath本地是否存在相应的版本(Windows下，
+classpath路径D:\Android\Android Studio\gradle\m2repository\com\android\tools\build\gradle\2.2.3
+如果没有对应的版本,没有则改为本地存在的版本)
+ dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+    
+2.工程路径下，查看gradle/wrapper/gradle-wrapper.properties里面的
+distributionUrl=https\://services.gradle.org/distributions/gradle-3.3-all.zip
+本地是否有相应的版本（Windows下，gradle路径为，C:\Users\xxl\.gradle\wrapper\dists\gradle-3.3-all\55gk2rcmfc6p2dg9u9ohc3hw9，
+即，默认的Studio安装路径,查看该文件夹下是否有完整版本的压缩包，那么最好把classpath改为本地存在的对应版本的，避免去下载，而出现漫长的等待
+）
+
+3.有必要的话进入项目下build.gradle里面去修改编译版本和target等版本，一般不需要修改。
+
+gradle-xxx.jar和gradlexxx.pom下载地址为
+https://jcenter.bintray.com/com/android/tools/build/gradle/
+进入找到自己想要的版本即可下载
+gradle-xxx.zip下载地址为
+http://services.gradle.org/distributions/
+ 
+ 
