@@ -1,7 +1,0 @@
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {//必须在onWindowFocusChanged方法里面调用
-        super.onWindowFocusChanged(hasFocus);
-        int[] location = new  int[2] ;
-        a.getLocationInWindow(location); //获取在当前窗口内的绝对坐标
-        Log.e("aa", "onCreate: "+location[0]+"y===="+location[1]);
-    }
