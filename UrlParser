@@ -1,0 +1,19 @@
+public Map<String,String> urlParser(String url) {
+	Map<String,String> map = new HashMap();
+	int index = url.indexOf("?");//返回？在链接中第一次出现的位置，表明后面接着的是url参数
+	String urlParams = url.subString(index +1,url.length());//截取到url携带的全部参数
+	String params[] = urlParams.split("&");//以&切割字符串，切割后返回一个字符数组
+	if(params != null) {
+		for(String str : params){//遍历数组，再次进行切割
+			String param[] = str.split("=");//把url携带的参数和值分割开，得到每个参数和参数对应的值的数组
+			for(int i= 0；i < param.length;i ++) {//循环参数和值的数组，以key value的形式存放到map集合中
+				if(param.length > 1) {//说明参数和值都存在
+					map.put(param[0],param[1]);
+				}else {//只有参数，没有值
+					map.put(param[0],"");
+				}
+			}
+		}
+	}
+	return map;
+}
