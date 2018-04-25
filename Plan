@@ -1,5 +1,5 @@
 
-		Html + Css + Js
+    Html + Css + Js
     
     小程序 Vue
     
@@ -13,18 +13,18 @@
     
     多条目
 
-		WebView支持进度条展示和下拉刷新
+    WebView支持进度条展示和下拉刷新
 
-		Activity左滑退出
+    Activity左滑退出
 
-		Bugly集成
+    Bugly集成
 		
-		分享
+    分享
     
     支付
+    
+    ImageLoader封装加载图片框架
 
-		ImageLoader封装加载图片框架
-
-		阿里百川
+    阿里百川
     
     360插件化
