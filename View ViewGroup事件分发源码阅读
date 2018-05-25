@@ -90,4 +90,13 @@
     
     情况2:
         没调用或者调用了li.mOnTouchListener.onTouch(this, event)方法  返回值为true
-        result
+        result 将会被置为 true 
+        
+        if (!result && onTouchEvent(event)) {
+                    result = true;
+        }
+        
+        此时 View 将不会 调用onTouchEvent(event) 方法
+        
+       总结 View的事件分发 流程 disPatchTouchEvent -> onTouch -> onTouchEvent
+        
